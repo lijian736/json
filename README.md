@@ -9,29 +9,46 @@ C++版本的json库
 
 #### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1.  下载直接编译即可.
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+#include <iostream>
+#include <string>
+#include <stdlib.h>
+#include "json.h"
 
-#### 参与贡献
+int main()
+{
+	JsonObject json;
+	std::string jsonPersonStr;
+	std::string jsonResult; 
+	
+	jsonPersonStr = R"({"name":"zhangsan","age": 18, "gender":"male","weight": 66.3})";
+	if (json.read_from_string(jsonPersonStr))
+	{
+		std::cout << "name: " << json["name"].as_string().c_str() << std::endl;
+		std::cout << "age: " << json["age"].as_int16() << std::endl;
+		std::cout << "gender: " << json["gender"].as_string().c_str() << std::endl;
+		std::cout << "weight: " << json["weight"].as_double() << std::endl;
+	}
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+	if (json.write_to_string(jsonResult))
+	{
+		std::cout << "the raw string: " << jsonResult.c_str() << std::endl;
+	}
 
+	json.clear();
 
-#### 特技
+	json["name"] = "zhangsan";
+	json["age"] = 18;
+	json["gender"] = "male";
+	json["weight"] = 66.3;
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+	if (json.write_to_string(jsonResult))
+	{
+		std::cout << "the raw string: " << jsonResult.c_str() << std::endl;
+	}
+
+    return 0;
+}
