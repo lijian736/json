@@ -13,6 +13,7 @@ C++版本的json库
 
 #### 使用说明
 ```
+
 #include <iostream>
 #include <string>
 #include <stdlib.h>
@@ -69,6 +70,11 @@ int main()
 	if (json.write_to_string(jsonResult))
 	{
 		std::cout << "the week string: " << jsonResult.c_str() << std::endl;
+	}
+
+	for (int i = 0; i < json.array_size(); i++)
+	{
+		std::cout << "the " << i << " is:" << json[i].as_string() << std::endl;
 	}
 
     return 0;
