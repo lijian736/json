@@ -585,6 +585,16 @@ bool JsonObject::write_to_string(std::string& str)
 	return true;
 }
 
+int JsonObject::array_size()
+{
+	if (m_is_array)
+	{
+		return m_members.size();
+	}
+
+	return -1;
+}
+
 JsonValue& JsonObject::operator[](int index)
 {
 	m_is_array = true;

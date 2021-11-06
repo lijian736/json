@@ -57,6 +57,11 @@ int main()
 		std::cout << "the week string: " << jsonResult.c_str() << std::endl;
 	}
 
+	for (int i = 0; i < json.array_size(); i++)
+	{
+		std::cout << "the " << i << " is:" << json[i].as_string() << std::endl;
+	}
+
     return 0;
 }
 

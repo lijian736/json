@@ -126,6 +126,13 @@ public:
 	 */
 	bool write_to_string(std::string& str);
 
+	/**
+	* @brief get the array size
+	*
+	* @return if the json object is not an array, return -1.
+	*/
+	int array_size();
+
 	JsonValue& operator[](int index);
 	const JsonValue& operator[](int index) const;
 
