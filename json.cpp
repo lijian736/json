@@ -889,6 +889,57 @@ bool JsonObject::read_object(const std::string &str, uint32_t &startPos)
 	return false;
 }
 
+bool JsonObject::read_array(const std::string &str, uint32_t &startPos)
+{
+	this->m_is_array = true;
+
+	if ((str.size() - startPos) < 2)
+	{
+		return false;
+	}
+	if (str[startPos] != '[')
+	{
+		return false;
+	}
+	startPos++;
+
+	char c;
+	while (startPos < str.length())
+	{
+		if (str[startPos] == ']')
+		{
+			startPos++;
+			return true;
+		}
+
+		JsonValue jsonValue;
+		if (!read_json_key_value(str, jsonValue, startPos))
+		{
+			return false;
+		}
+		this->push(std::move(jsonValue));
+
+		if (!read_delimiter(str, startPos, c))
+		{
+			return false;
+		}
+		if (c == ']')
+		{
+			return true;
+		}
+		else if (c == ',')
+		{
+			continue;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	return false;
+}
+
 bool JsonObject::read_array(const std::string &str, JsonValue &result, uint32_t &startPos)
 {
 	result.reset();

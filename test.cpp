@@ -7,12 +7,12 @@
 int main()
 {
 	JsonObject json;
-	std::string jsonPersonStr;
-	std::string jsonResult; 
-	
-	//convert string to json
-	jsonPersonStr = R"({"name":"zhangsan","age": 18, "gender":"male","weight": 66.3})";
-	if (json.read_from_string(jsonPersonStr))
+	std::string jsonStr;
+	std::string jsonResult;
+
+	//1. convert string to json
+	jsonStr = R"({"name":"zhangsan","age": 18, "gender":"male","weight": 66.3})";
+	if (json.read_from_string(jsonStr))
 	{
 		std::cout << "name: " << json["name"].as_string().c_str() << std::endl;
 		std::cout << "age: " << json["age"].as_int16() << std::endl;
@@ -28,7 +28,7 @@ int main()
 
 	json.clear();
 
-	//json object
+	//2. json object
 	json["name"] = "zhangsan";
 	json["age"] = 18;
 	json["gender"] = "male";
@@ -42,7 +42,7 @@ int main()
 
 	json.clear();
 
-	//json array
+	//3. json array
 	json[0] = "Monday";
 	json[1] = "Tuesday";
 	json[2] = "Wednesday";
@@ -62,6 +62,20 @@ int main()
 		std::cout << "the " << i << " is:" << json[i].as_string() << std::endl;
 	}
 
-    return 0;
+	json.clear();
+
+	//4. json array parse
+	jsonStr = R"(["orange", "banana", "apple"])";
+	if (json.read_from_string(jsonStr))
+	{
+		for (int i = 0; i < json.array_size(); i++)
+		{
+			std::cout << "the " << i << " is:" << json[i].as_string() << std::endl;
+		}
+	}
+
+	json.clear();
+
+	return 0;
 }
 

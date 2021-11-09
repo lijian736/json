@@ -155,6 +155,7 @@ private:
 	bool read_string(const std::string &str, JsonValue &result, uint32_t &startPos);
 	bool read_number(const std::string &str, JsonValue &result, uint32_t &startPos);
 	bool read_array(const std::string &str, JsonValue &result, uint32_t &startPos);
+	bool read_array(const std::string &str, uint32_t &startPos);
 	
 	bool read_object(const std::string &str, uint32_t &startPos);
 	bool read_json_key_value(const std::string &str, JsonValue &result, uint32_t &startPos);
