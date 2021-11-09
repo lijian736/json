@@ -476,6 +476,10 @@ bool JsonObject::read_from_string(const std::string& str)
 	{
 		return read_object(str, startPos);
 	}
+	else if (str[startPos] == '[')
+	{
+		return read_array(str, startPos);
+	}
 	else
 	{
 		return false;
