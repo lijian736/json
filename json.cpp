@@ -511,6 +511,7 @@ bool JsonObject::write_to_string(std::string& str)
 			ss << "\"" << it->first << "\"" << ":";
 		}
 
+		std::string objStr;
 		switch (it->second.type)
 		{
 		case ValueType::T_NULL:
@@ -518,7 +519,7 @@ bool JsonObject::write_to_string(std::string& str)
 			break;
 
 		case ValueType::T_BOOL:
-			ss << it->second.value.bool_v ? "true" : "false";
+			ss << (it->second.value.bool_v ? "true" : "false");
 			break;
 
 		case ValueType::T_INT8:
@@ -563,7 +564,6 @@ bool JsonObject::write_to_string(std::string& str)
 			break;
 
 		case ValueType::T_OBJ:
-			std::string objStr;
 			if (it->second.value.object->write_to_string(objStr))
 			{
 				ss << objStr;
@@ -573,6 +573,9 @@ bool JsonObject::write_to_string(std::string& str)
 				return false;
 			}
 			break;
+			
+		case ValueType::T_UNDEFINED:
+			return false;
 		}
 	}
 
